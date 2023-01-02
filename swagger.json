@@ -1,0 +1,234 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Final Task-Student info",
+    "version": "1.0.0",
+    "title": "Final Task-Noral",
+    "contact": {
+      "email": "noralwang06@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "host": "localhost:4000",
+  "basePath": "/api",
+  "paths": {
+    "/students": {
+      "get": {
+        "summary": "Get all students",
+        "description": "Get all students in the mongodb",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/studentsResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/students/new": {
+      "post": {
+        "summary": "Create new student",
+        "description": "Create new student in the collection",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "student object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/createResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/students/{id}": {
+      "put": {
+        "summary": "modify a single student",
+        "description": "modify a single document by Id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "student id that needs to be retireved",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "student object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Student"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/studentsResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/students/delete/{id}": {
+      "delete": {
+        "summary": "Delete the student",
+        "description": "Delete the student from the collection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "student id that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/deleteResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "studentsResponse": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "pass": {
+          "type": "boolean"
+        }
+      }
+    },
+    "createResponse": {
+      "type": "object",
+      "properties": {
+        "acknowledged": {
+          "type": "boolean"
+        },
+        "insertedId": {
+          "type": "string"
+        }
+      }
+    },
+    "deleteResponse": {
+      "type": "object",
+      "properties": {
+        "DeleteSuccess": {
+          "type": "boolean"
+        },
+        "deletedCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "Student": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "WANGJIAHUi"
+        },
+        "gender": {
+          "type": "string",
+          "example": "Female"
+        },
+        "pass": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "InvalidResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
